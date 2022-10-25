@@ -5,7 +5,7 @@ import { AuthContext } from "../../contexts/AuthProvider";
 
 const Login = () => {
   const [error, setError] = useState("");
-  const { providerLogin } = useContext(AuthContext);
+  const { providerLogin, signInUser } = useContext(AuthContext);
 
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
@@ -48,12 +48,34 @@ const Login = () => {
       });
   };
 
+  const handleSignIn = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    // console.log(email, password);
+    signInUser(email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user);
+        setError("");
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setError(errorMessage);
+      });
+  };
+
   return (
     <div className="flex justify-center">
       <div className="w-full max-w-md p-8 space-y-3 rounded-xl dark:bg-gray-900 dark:text-gray-100">
         <h1 className="text-2xl font-bold text-center">Login</h1>
         <p className="text-center text-red-600">{error}</p>
         <form
+          onSubmit={handleSignIn}
           novalidate=""
           action=""
           className="space-y-6 ng-untouched ng-pristine ng-valid"
