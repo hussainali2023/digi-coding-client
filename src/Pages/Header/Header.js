@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Login from "../Login/Login";
+import DarkMode from "../DarkMode/DarkMode";
 
 const Header = () => {
   const [navbar, setNavbar] = useState(false);
@@ -77,6 +77,9 @@ const Header = () => {
                       Login
                     </button>
                   </Link>
+                </li>
+                <li className="flex align-middle">
+                  <DarkMode></DarkMode>
                 </li>
               </ul>
             </div>
