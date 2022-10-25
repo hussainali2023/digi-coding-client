@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthProvider";
 import DarkMode from "../DarkMode/DarkMode";
 
 const Header = () => {
   const [navbar, setNavbar] = useState(false);
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logOut().then().catch();
+  };
 
   return (
     <div>
@@ -71,16 +77,34 @@ const Header = () => {
                 <li className="text-gray-600 hover:text-blue-600">
                   <Link to={"/blog"}>Blog</Link>
                 </li>
-                <li>
-                  <Link to={"/login"}>
-                    <button className=" px-4 py-1 bg-orange-300 hover:bg-orange-500 text-white rounded-sm font-semibold">
-                      Login
-                    </button>
-                  </Link>
-                </li>
                 <li className="flex align-middle">
                   <DarkMode></DarkMode>
                 </li>
+                <>
+                  {user?.uid ? (
+                    <>
+                      <button
+                        onClick={handleLogOut}
+                        className=" px-4 py-1 bg-orange-300 hover:bg-orange-500 text-white rounded-sm font-semibold"
+                      >
+                        Log Out
+                      </button>
+                      <img
+                        style={{ height: "40px" }}
+                        className="rounded-full"
+                        src={user?.photoURL}
+                      ></img>
+                    </>
+                  ) : (
+                    <li>
+                      <Link to={"/login"}>
+                        <button className=" px-4 py-1 bg-orange-300 hover:bg-orange-500 text-white rounded-sm font-semibold">
+                          Login
+                        </button>
+                      </Link>
+                    </li>
+                  )}
+                </>
               </ul>
             </div>
           </div>

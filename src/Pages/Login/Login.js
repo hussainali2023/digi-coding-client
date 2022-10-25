@@ -1,11 +1,11 @@
 import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import swal from "sweetalert";
 import { AuthContext } from "../../contexts/AuthProvider";
 
 const Login = () => {
-  const [error, setError] = useState("");
-  const { providerLogin, signInUser } = useContext(AuthContext);
+  const { providerLogin, signInUser, forgetPassword } = useContext(AuthContext);
 
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
@@ -15,14 +15,14 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
-        setError("");
+        swal("Good Job", "successfuly Login", "success");
         // ...
       })
       .catch((error) => {
         // Handle Errors here.
         const errorCode = error.code;
         const errorMessage = error.message;
-        setError(errorCode, errorMessage);
+        swal("Sorry!", errorMessage, "error");
         // The email of the user's account used.
 
         // ...
@@ -34,14 +34,14 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
-        setError("");
+        swal("Good Job", "successfuly Login", "success");
         // ...
       })
       .catch((error) => {
         // Handle Errors here.
         const errorCode = error.code;
         const errorMessage = error.message;
-        setError(errorCode, errorMessage);
+        swal("Sorry!", errorMessage, "error");
         // The email of the user's account used.
 
         // ...
@@ -59,32 +59,57 @@ const Login = () => {
         // Signed in
         const user = userCredential.user;
         console.log(user);
-        setError("");
+        swal("Good job!", "Successfully Login", "success");
+
         // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        setError(errorMessage);
+        swal("Sorry!", errorMessage, "error");
       });
   };
 
+  const [email, setEmail] = useState("");
+
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handleForgetPassword = (e) => {
+    forgetPassword(email)
+      .then(() => {
+        // Password reset email sent!
+        // ..
+        swal(
+          "Success",
+          "Check Your Email we have sended a reset link (if you can't find plaese look at the spam folder)",
+          "success"
+        );
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        swal("Sorry", errorMessage, "error");
+        // ..
+      });
+  };
   return (
     <div className="flex justify-center">
       <div className="w-full max-w-md p-8 space-y-3 rounded-xl dark:bg-gray-900 dark:text-gray-100">
         <h1 className="text-2xl font-bold text-center">Login</h1>
-        <p className="text-center text-red-600">{error}</p>
         <form
           onSubmit={handleSignIn}
-          novalidate=""
+          noValidate=""
           action=""
           className="space-y-6 ng-untouched ng-pristine ng-valid"
         >
           <div className="space-y-1 text-sm">
-            <label for="email" className="block dark:text-gray-400">
+            <label htmlFor="email" className="block dark:text-gray-400">
               Email
             </label>
             <input
+              onBlur={handleEmail}
               type="text"
               name="email"
               id="email"
@@ -93,7 +118,7 @@ const Login = () => {
             />
           </div>
           <div className="space-y-1 text-sm">
-            <label for="password" className="block dark:text-gray-400">
+            <label htmlFor="password" className="block dark:text-gray-400">
               Password
             </label>
             <input
@@ -104,9 +129,9 @@ const Login = () => {
               className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
             />
             <div className="flex justify-end text-xs dark:text-gray-400">
-              <a rel="noopener noreferrer" href="#">
+              <p onClick={handleForgetPassword} className="cursor-pointer">
                 Forgot Password?
-              </a>
+              </p>
             </div>
           </div>
           <button

@@ -1,24 +1,29 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import swal from "sweetalert";
 import { AuthContext } from "../../contexts/AuthProvider";
 
 const Register = () => {
-  const { createUser } = useContext(AuthContext);
-  console.log(createUser);
+  const { createUser, updateDetails, verifyEmail } = useContext(AuthContext);
   const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
+    const name = form.name.value;
+    const photoURL = form.photoURL.value;
     const email = form.email.value;
     const password = form.password.value;
+
     // console.log(email, password);
     createUser(email, password)
       .then((result) => {
         // Signed in
         const user = result.user;
-        console.log(user);
-        setError("");
+        form.reset();
+        handleUpdateDetails(name, photoURL);
+        handleEmailVerification();
+        swal("Successful", "Verification link sended to Your Email", "success");
         // ...
       })
       .catch((error) => {
@@ -29,6 +34,23 @@ const Register = () => {
         // ..
       });
   };
+
+  const handleUpdateDetails = (name, photoURL) => {
+    const profile = {
+      displayName: name,
+      photoURL: photoURL,
+    };
+    updateDetails(profile)
+      .then(() => {})
+      .catch((error) => console.error(error));
+  };
+
+  const handleEmailVerification = () => {
+    verifyEmail()
+      .then(() => {})
+      .catch((error) => console.error(error));
+  };
+
   return (
     <div className=" flex justify-center">
       <div className="w-full max-w-md p-8 space-y-3 rounded-xl dark:bg-gray-900 dark:text-gray-100">
@@ -36,13 +58,13 @@ const Register = () => {
         <p className="text-center text-red-600">{error}</p>
         <form
           onSubmit={handleSubmit}
-          novalidate=""
+          noValidate=""
           action=""
           className="space-y-6 ng-untouched ng-pristine ng-valid"
         >
           <div className="space-y-1 text-sm">
-            <label for="name" className="block dark:text-gray-400">
-              Name
+            <label htmlFor="name" className="block dark:text-gray-400">
+              Name <span className="text-red-600">*</span>
             </label>
             <input
               type="text"
@@ -50,10 +72,11 @@ const Register = () => {
               id="name"
               placeholder="Enter your name"
               className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+              required
             />
           </div>
           <div className="space-y-1 text-sm">
-            <label for="photoURL" className="block dark:text-gray-400">
+            <label htmlFor="photoURL" className="block dark:text-gray-400">
               PhotoURL
             </label>
             <input
@@ -65,20 +88,21 @@ const Register = () => {
             />
           </div>
           <div className="space-y-1 text-sm">
-            <label for="email" className="block dark:text-gray-400">
-              Email
+            <label htmlFor="email" className="block dark:text-gray-400">
+              Email <span className="text-red-600">*</span>
             </label>
             <input
-              type="text"
+              type="email"
               name="email"
               id="email"
               placeholder="Enter Email Address"
               className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+              required
             />
           </div>
           <div className="space-y-1 text-sm">
-            <label for="password" className="block dark:text-gray-400">
-              Password
+            <label htmlFor="password" className="block dark:text-gray-400">
+              Password <span className="text-red-600">*</span>
             </label>
             <input
               type="password"
