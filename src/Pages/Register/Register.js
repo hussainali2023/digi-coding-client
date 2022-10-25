@@ -1,11 +1,16 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import { AuthContext } from "../../contexts/AuthProvider";
 
 const Register = () => {
-  const { createUser, updateDetails, verifyEmail } = useContext(AuthContext);
+  const { createUser, updateDetails, verifyEmail, user } =
+    useContext(AuthContext);
   const [error, setError] = useState("");
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/login";
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,7 +28,15 @@ const Register = () => {
         form.reset();
         handleUpdateDetails(name, photoURL);
         handleEmailVerification();
-        swal("Successful", "Verification link sended to Your Email", "success");
+        if (user.uid) {
+          navigate(from, { replace: true });
+          swal(
+            "Successful",
+            "Verification link sended to Your Email",
+            "success"
+          );
+        }
+
         // ...
       })
       .catch((error) => {

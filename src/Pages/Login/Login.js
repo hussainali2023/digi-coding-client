@@ -1,11 +1,16 @@
 import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import { AuthContext } from "../../contexts/AuthProvider";
 
 const Login = () => {
-  const { providerLogin, signInUser, forgetPassword } = useContext(AuthContext);
+  const { providerLogin, signInUser, forgetPassword, setLoading } =
+    useContext(AuthContext);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
@@ -16,6 +21,7 @@ const Login = () => {
         const user = result.user;
         console.log(user);
         swal("Good Job", "successfuly Login", "success");
+        navigate(from, { replace: true });
         // ...
       })
       .catch((error) => {
@@ -35,6 +41,7 @@ const Login = () => {
         const user = result.user;
         console.log(user);
         swal("Good Job", "successfuly Login", "success");
+        navigate(from, { replace: true });
         // ...
       })
       .catch((error) => {
@@ -43,7 +50,6 @@ const Login = () => {
         const errorMessage = error.message;
         swal("Sorry!", errorMessage, "error");
         // The email of the user's account used.
-
         // ...
       });
   };
@@ -59,14 +65,25 @@ const Login = () => {
         // Signed in
         const user = userCredential.user;
         console.log(user);
-        swal("Good job!", "Successfully Login", "success");
-
-        // ...
+        if (user.emailVerified) {
+          navigate(from, { replace: true });
+          swal("Good job!", "Successfully Login", "success");
+        } else {
+          swal(
+            "Sorry",
+            "Your email is not verified. Please verify your email address.",
+            "error"
+          );
+        }
       })
+
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         swal("Sorry!", errorMessage, "error");
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 

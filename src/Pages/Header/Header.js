@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 import DarkMode from "../DarkMode/DarkMode";
+import { FaUserAlt } from "react-icons/fa";
+import swal from "sweetalert";
 
 const Header = () => {
   const [navbar, setNavbar] = useState(false);
@@ -9,6 +11,10 @@ const Header = () => {
 
   const handleLogOut = () => {
     logOut().then().catch();
+  };
+
+  const handleShowProfile = () => {
+    swal(`${user?.displayName}`);
   };
 
   return (
@@ -83,17 +89,23 @@ const Header = () => {
                 <>
                   {user?.uid ? (
                     <>
+                      {/* <small>{user?.displayName}</small> */}
                       <button
                         onClick={handleLogOut}
                         className=" px-4 py-1 bg-orange-300 hover:bg-orange-500 text-white rounded-sm font-semibold"
                       >
                         Log Out
                       </button>
-                      <img
-                        style={{ height: "40px" }}
-                        className="rounded-full"
-                        src={user?.photoURL}
-                      ></img>
+                      {user?.photoURL ? (
+                        <img
+                          onClick={handleShowProfile}
+                          src={user?.photoURL}
+                          style={{ height: "40px" }}
+                          className="rounded-full cursor-pointer"
+                        />
+                      ) : (
+                        <FaUserAlt />
+                      )}
                     </>
                   ) : (
                     <li>
