@@ -98,7 +98,7 @@ const Header = () => {
                       </button>
                       {user?.photoURL ? (
                         <img
-                          onClick={handleShowProfile}
+                          onMouseOver={handleShowProfile}
                           src={user?.photoURL}
                           style={{ height: "40px" }}
                           className="rounded-full cursor-pointer"

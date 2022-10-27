@@ -3,10 +3,12 @@ import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const AllCourses = ({ course }) => {
-  console.log(course);
-  const { title, subtitle, courseUrl, ratings, reviews } = course;
+  const { id, title, subtitle, courseUrl, ratings, reviews } = course;
   return (
-    <Link className=" rounded-md shadow-md dark:bg-gray-900 dark:text-gray-100">
+    <Link
+      to={`/course/${id}`}
+      className=" rounded-md shadow-md dark:bg-gray-900 dark:text-gray-100"
+    >
       <img
         src={courseUrl}
         alt=""
@@ -30,12 +32,6 @@ const AllCourses = ({ course }) => {
             <p>{reviews}</p>
           </div>
         </div>
-        <button
-          type="button"
-          className="flex items-center justify-center w-full p-3 font-semibold tracking-wide rounded-md dark:bg-violet-400 dark:text-gray-900"
-        >
-          Read more
-        </button>
       </div>
     </Link>
   );
