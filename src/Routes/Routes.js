@@ -1,3 +1,4 @@
+import { async } from "@firebase/util";
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../Layout/Main";
 import Blog from "../Pages/Blog/Blog";
@@ -19,7 +20,11 @@ export const router = createBrowserRouter([
       {
         path: "/courses",
         element: <Courses></Courses>,
+        loader: async () => {
+          return fetch("http://localhost:5000/courses");
+        },
       },
+
       {
         path: "/blog",
         element: <Blog></Blog>,
