@@ -12,7 +12,7 @@ const AllCourses = ({ course }) => {
       <img
         src={courseUrl}
         alt=""
-        className="object-cover object-center w-full rounded-t-md md:h-44 h-32  dark:bg-gray-500"
+        className="object-cover object-center w-full rounded-t-md md:h-44 h-24  dark:bg-gray-500"
       />
       <div className="flex flex-col justify-between md:p-6 md:space-y-6">
         <div className="space-y-2">
