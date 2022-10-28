@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 import DarkMode from "../DarkMode/DarkMode";
 import { FaUserAlt } from "react-icons/fa";
-import swal from "sweetalert";
-
+import toast, { Toaster } from "react-hot-toast";
 const Header = () => {
   const [navbar, setNavbar] = useState(false);
   const { user, logOut } = useContext(AuthContext);
@@ -14,7 +13,8 @@ const Header = () => {
   };
 
   const handleShowProfile = () => {
-    swal(`${user?.displayName}`);
+    // swal()
+    toast(`${user?.displayName}`);
   };
 
   return (
@@ -97,12 +97,19 @@ const Header = () => {
                         Log Out
                       </button>
                       {user?.photoURL ? (
-                        <img
-                          onMouseOver={handleShowProfile}
-                          src={user?.photoURL}
-                          style={{ height: "40px" }}
-                          className="rounded-full cursor-pointer"
-                        />
+                        <>
+                          <img
+                            onMouseOver={handleShowProfile}
+                            src={user?.photoURL}
+                            style={{ height: "40px" }}
+                            className="rounded-full cursor-pointer"
+                          />
+                          <Toaster
+                            position="top-right"
+                            reverseOrder={false}
+                            toastOptions={{ duration: 1000 }}
+                          />
+                        </>
                       ) : (
                         <FaUserAlt />
                       )}

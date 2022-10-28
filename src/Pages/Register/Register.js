@@ -6,7 +6,6 @@ import { AuthContext } from "../../contexts/AuthProvider";
 const Register = () => {
   const { createUser, updateDetails, verifyEmail, user } =
     useContext(AuthContext);
-  const [error, setError] = useState("");
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -32,7 +31,7 @@ const Register = () => {
           navigate(from, { replace: true });
           swal(
             "Successful",
-            "Verification link sended to Your Email",
+            "Your Registration is complete,  one verification link sended to Your Email",
             "success"
           );
         }
@@ -42,7 +41,7 @@ const Register = () => {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        setError(errorMessage);
+        swal("Sorry", errorMessage, "error");
 
         // ..
       });
@@ -68,7 +67,6 @@ const Register = () => {
     <div className=" flex justify-center">
       <div className="w-full max-w-md p-8 space-y-3 rounded-xl dark:bg-gray-900 dark:text-gray-100">
         <h1 className="text-2xl font-bold text-center">Sign Up</h1>
-        <p className="text-center text-red-600">{error}</p>
         <form
           onSubmit={handleSubmit}
           noValidate=""

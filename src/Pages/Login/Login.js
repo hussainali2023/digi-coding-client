@@ -65,6 +65,7 @@ const Login = () => {
         // Signed in
         const user = userCredential.user;
         console.log(user);
+        form.reset();
         if (user.emailVerified) {
           navigate(from, { replace: true });
           swal("Good job!", "Successfully Login", "success");

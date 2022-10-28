@@ -6,7 +6,9 @@ const CoursesTitle = ({ course }) => {
   return (
     <div>
       <Link to={`/course/${id}`}>
-        <li className="md:text-xl md:mb-6">{title}</li>
+        <li className="list-none md:text-xl text-md mb-4 md:mb-6 bg-sky-200 px-1 rounded-md">
+          {title}
+        </li>
       </Link>
     </div>
   );

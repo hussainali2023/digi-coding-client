@@ -2,30 +2,30 @@
 
 ### Live Site Link: https://digi-coding.web.app/
 
-#### Single Page Application Used NavLink
+### Single Page Application Used NavLink
 
-#### Firebase Authentication :
+### Firebase Authentication :
 
-##### \* Email, Password
+#### Email, Password
 
-##### \* Google Login
+#### Google Login
 
-##### \* Github
+#### Github
 
-#### Create Protected Route
+### Create Protected Route
 
-#### Responsive for Web and SmartPhones
+### Responsive for Web and SmartPhones
 
-#### Hide Api keys
+### Hide Api keys
 
-#### Fully Responsive For Desktop, Tablet and Mobile devices
+### Fully Responsive For Desktop, Tablet and Mobile devices
 
-#### Some questions and Answer in Blog route.
+### Some questions and Answer in Blog route.
 
 ### Framework:
 
 #### `TailWind` `MambaUI`
 
-### Others:
+### Packages:
 
-#### `React Router` `Sweat Aleart` `react-icons`
+#### `React Router` `Sweat Aleart` `react-icons` `react-hot-toast`
