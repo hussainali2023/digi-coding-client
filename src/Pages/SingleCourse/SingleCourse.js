@@ -1,3 +1,4 @@
+import jsPDF from "jspdf";
 import React, { useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 
@@ -6,6 +7,15 @@ const SingleCourse = () => {
   console.log(course);
   const { title, courseUrl, description, topics, subtitle, duration } = course;
 
+  const pdfGenerate = () => {
+    let doc = new jsPDF("landscape", "px", "a4", "false");
+    doc.addImage(courseUrl, 56, 50, 500, 400);
+    doc.addPage();
+    doc.text(280, 15, title);
+    doc.text(20, 40, topics);
+
+    doc.save("digi-coding.pdf");
+  };
   return (
     <div className="flex justify-center">
       <div className="flex flex-col max-w-lg p-6 space-y-6 overflow-hidden rounded-lg shadow-md dark:bg-gray-900 dark:text-gray-100">
@@ -40,7 +50,10 @@ const SingleCourse = () => {
         </p>
         <div className="flex justify-evenly">
           <Link>
-            <button className="px-4 py-2 bg-orange-500 rounded-md">
+            <button
+              onClick={pdfGenerate}
+              className="px-4 py-2 bg-orange-500 rounded-md"
+            >
               Download Details
             </button>
           </Link>

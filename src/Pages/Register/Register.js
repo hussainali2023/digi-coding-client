@@ -24,9 +24,9 @@ const Register = () => {
       .then((result) => {
         // Signed in
         const user = result.user;
-        form.reset();
         handleUpdateDetails(name, photoURL);
         handleEmailVerification();
+        form.reset();
         if (user.uid) {
           navigate(from, { replace: true });
           swal(

@@ -18,6 +18,8 @@
 
 ### Hide Api keys
 
+### Download pdf using `jspdf`
+
 ### Fully Responsive For Desktop, Tablet and Mobile devices
 
 ### Some questions and Answer in Blog route.
@@ -28,4 +30,4 @@
 
 ### Packages:
 
-#### `React Router` `Sweat Aleart` `react-icons` `react-hot-toast`
+#### `React Router` `Sweat Aleart` `react-icons` `react-hot-toast` `jspdf`

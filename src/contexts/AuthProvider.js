@@ -35,10 +35,12 @@ const AuthProvider = ({ children }) => {
   };
 
   const verifyEmail = () => {
+    setLoading(true);
     return sendEmailVerification(auth.currentUser);
   };
 
   const updateDetails = (profile) => {
+    setLoading(true);
     return updateProfile(auth.currentUser, profile);
   };
 
