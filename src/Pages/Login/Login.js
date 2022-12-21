@@ -66,16 +66,9 @@ const Login = () => {
         const user = userCredential.user;
         console.log(user);
         form.reset();
-        if (user.emailVerified) {
-          navigate(from, { replace: true });
-          swal("Good job!", "Successfully Login", "success");
-        } else {
-          swal(
-            "Sorry",
-            "Your email is not verified. Please verify your email address.",
-            "error"
-          );
-        }
+
+        navigate(from, { replace: true });
+        swal("Good job!", "Successfully Login", "success");
       })
 
       .catch((error) => {

@@ -9,7 +9,7 @@ const Register = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || "/login";
+  const from = location.state?.from?.pathname || "/";
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,15 +25,11 @@ const Register = () => {
         // Signed in
         const user = result.user;
         handleUpdateDetails(name, photoURL);
-        handleEmailVerification();
+        // handleEmailVerification();
         form.reset();
         if (user.uid) {
           navigate(from, { replace: true });
-          swal(
-            "Successful",
-            "Your Registration is complete,  one verification link sended to Your Email",
-            "success"
-          );
+          swal("Successful", "Your Registration is complete", "success");
         }
 
         // ...
@@ -57,11 +53,11 @@ const Register = () => {
       .catch((error) => console.error(error));
   };
 
-  const handleEmailVerification = () => {
-    verifyEmail()
-      .then(() => {})
-      .catch((error) => console.error(error));
-  };
+  // const handleEmailVerification = () => {
+  //   verifyEmail()
+  //     .then(() => {})
+  //     .catch((error) => console.error(error));
+  // };
 
   return (
     <div className=" flex justify-center">

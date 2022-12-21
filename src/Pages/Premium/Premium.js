@@ -2,10 +2,15 @@ import React from "react";
 import swal from "sweetalert";
 
 const Premium = () => {
-  swal("Congratulations!", "Your Premium service is active now", "success");
   return (
-    <div>
-      <h1 className=" text-3xl text-center">This is Premium Page</h1>
+    <div className=" mt-10">
+      <h1 className=" text-3xl text-center">
+        Welcome to the Premium Page section. This is page is only for the logged
+        in user. <br />
+      </h1>
+      <h1 className=" text-3xl font-bold text-center mt-4">
+        Under developement
+      </h1>
     </div>
   );
 };

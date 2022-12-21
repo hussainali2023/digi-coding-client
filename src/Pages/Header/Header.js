@@ -7,6 +7,7 @@ import toast, { Toaster } from "react-hot-toast";
 const Header = () => {
   const [navbar, setNavbar] = useState(false);
   const { user, logOut } = useContext(AuthContext);
+  console.log(user);
 
   const handleLogOut = () => {
     logOut().then().catch();
@@ -111,7 +112,7 @@ const Header = () => {
                           />
                         </>
                       ) : (
-                        <FaUserAlt />
+                        <FaUserAlt onMouseOver={handleShowProfile}></FaUserAlt>
                       )}
                     </>
                   ) : (
