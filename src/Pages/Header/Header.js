@@ -10,7 +10,7 @@ const Header = () => {
   console.log(user);
 
   const handleLogOut = () => {
-    logOut().then().catch();
+    logOut().then(toast.success("Logout Successful")).catch();
   };
 
   const handleShowProfile = () => {
@@ -20,7 +20,7 @@ const Header = () => {
 
   return (
     <div>
-      <nav className="w-full bg-white shadow">
+      <nav className="w-full bg-white dark:bg-gray-800 dark:text-white shadow">
         <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
           <div>
             <div className="flex items-center justify-between py-3 md:py-5 md:block">
@@ -67,21 +67,21 @@ const Header = () => {
           </div>
           <div>
             <div
-              className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${
+              className={`flex-1 justify-self-center pb-3 dark:text-white mt-8 md:block md:pb-0 md:mt-0 ${
                 navbar ? "block" : "hidden"
               }`}
             >
-              <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-                <li className="text-gray-600 hover:text-blue-600">
+              <ul className=" text-gray-600 dark:text-white items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
+                <li className=" hover:text-blue-600">
                   <Link to={"/"}>Home</Link>
                 </li>
-                <li className="text-gray-600 hover:text-blue-600">
+                <li className=" hover:text-blue-600">
                   <Link to={"/courses"}>Courses</Link>
                 </li>
-                <li className="text-gray-600 hover:text-blue-600">
+                <li className=" hover:text-blue-600">
                   <Link to={"/faq"}>Faq</Link>
                 </li>
-                <li className="text-gray-600 hover:text-blue-600">
+                <li className=" hover:text-blue-600">
                   <Link to={"/blog"}>Blog</Link>
                 </li>
                 <li className="flex align-middle">

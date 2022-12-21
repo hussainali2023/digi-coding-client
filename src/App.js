@@ -2,11 +2,13 @@ import logo from "./logo.svg";
 import "./App.css";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./Routes/Routes";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
-    <div>
+    <div className=" dark:bg-gray-800 dark:text-white">
       <RouterProvider router={router}></RouterProvider>
+      <Toaster />
     </div>
   );
 }

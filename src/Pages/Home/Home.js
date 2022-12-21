@@ -4,14 +4,14 @@ import { Link, useLoaderData } from "react-router-dom";
 const Home = () => {
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-2 dark:bg-gray-800">
         <div className="mx-4">
           <img
             className="rounded-md"
             src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
           />
         </div>
-        <div className=" mx-4 p-2 md:text-xl">
+        <div className=" mx-4 p-2 md:text-xl dark:text-white">
           <p>
             The best online coding courses offer a convenient, flexible way to
             learn in-demand skills, whether you plan to work in programming or

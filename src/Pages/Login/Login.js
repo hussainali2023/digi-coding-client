@@ -106,7 +106,7 @@ const Login = () => {
       });
   };
   return (
-    <div className="md:flex justify-evenly">
+    <div className="md:flex justify-evenly dark:bg-gray-800 dark:text-white">
       <div>
         <img
           src="https://web.programming-hero.com/static/media/man-with-laptop.331dfa07.png"
